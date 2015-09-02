@@ -41,6 +41,9 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openStoragePathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.logKeysdebugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.flushKeysToLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.gridShortKeys)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -140,6 +143,9 @@
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openStoragePathToolStripMenuItem,
+            this.logKeysdebugToolStripMenuItem,
+            this.flushKeysToLogToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
@@ -148,7 +154,7 @@
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -163,9 +169,30 @@
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.aboutToolStripMenuItem.Text = "&About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
+            // openStoragePathToolStripMenuItem
+            // 
+            this.openStoragePathToolStripMenuItem.Name = "openStoragePathToolStripMenuItem";
+            this.openStoragePathToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.openStoragePathToolStripMenuItem.Text = "&Open Storage Path";
+            this.openStoragePathToolStripMenuItem.Click += new System.EventHandler(this.openStoragePathToolStripMenuItem_Click);
+            // 
+            // logKeysdebugToolStripMenuItem
+            // 
+            this.logKeysdebugToolStripMenuItem.Name = "logKeysdebugToolStripMenuItem";
+            this.logKeysdebugToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.logKeysdebugToolStripMenuItem.Text = "&Log Keys (debug)";
+            this.logKeysdebugToolStripMenuItem.Click += new System.EventHandler(this.logKeysdebugToolStripMenuItem_Click);
+            // 
+            // flushKeysToLogToolStripMenuItem
+            // 
+            this.flushKeysToLogToolStripMenuItem.Name = "flushKeysToLogToolStripMenuItem";
+            this.flushKeysToLogToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.flushKeysToLogToolStripMenuItem.Text = "&Flush Keys to Log";
+            this.flushKeysToLogToolStripMenuItem.Click += new System.EventHandler(this.flushKeysToLogToolStripMenuItem_Click);
             // 
             // frmMain
             // 
@@ -209,6 +236,9 @@
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openStoragePathToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem logKeysdebugToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem flushKeysToLogToolStripMenuItem;
     }
 }
 

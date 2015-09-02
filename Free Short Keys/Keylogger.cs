@@ -12,6 +12,7 @@ using System;
 using System.IO;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using System.Collections.Generic;
 
 namespace Free_Short_Keys
 {
@@ -92,44 +93,59 @@ namespace Free_Short_Keys
                 if (GetAsyncKeyState(i) == -32767)
                 {
                     string key = Enum.GetName(typeof(Keys), i);
-                    switch (key)
-                    {
-                        case "Oemtilde":
-                            key = "`";
-                            break;
-                        default:
-                            break;
-                    }
-                    keyBuffer += key;
+                    keyBuffer += key + " ";
 
-                    foreach (var shortKey in ShortKeyConfiguration.Instance.ShortKeys)
+                    string keyBufferCompare = keyBuffer.Replace(" ", string.Empty);
+                    foreach (var shortKey in ShortKeyConfiguration.GetShortKeys())
                     {
-                        string fullKey = ((shortKey.CustomSuffix.Length > 0 ? shortKey.CustomSuffix : ShortKeyConfiguration.Instance.DefaultSuffix) + shortKey.Key).ToUpperInvariant();
-                        if (keyBuffer.EndsWith(fullKey))
+                        string fullKey = ((shortKey.CustomSuffix.Length > 0 ? shortKey.CustomSuffix : ShortKeyConfiguration.Default.Suffix) + shortKey.Key).ToUpperInvariant();
+                        fullKey = TextToShortKey(fullKey);
+                        if (keyBufferCompare.EndsWith(fullKey))
                         {
-                            string keys = shortKey.ReplacementKey;
-                            keys = keys.Replace("\r\n", "\r\r\n");
-                            keys = keys.Replace("\r\r", string.Empty);
+                            SendKeys.SendWait($"{{BACKSPACE {fullKey.Length}}}");
+                            string keys = PerformNewLineFix(shortKey.ReplacementKey);
                             if (shortKey.UseClipboard)
                             {
-                                //IDataObject clipboardData = Clipboard.GetDataObject();
-                                //Clipboard.SetDataObject(keys);
-                                //Clipboard.
+                                frmMain.Me.Invoke(new Action(() =>
+                                {
+                                    IDataObject clipboardData = Clipboard.GetDataObject();
+                                    Clipboard.SetDataObject(keys);
+                                    SendKeys.SendWait($"^(v)");
+                                    Clipboard.SetDataObject(clipboardData);
+                                }));
                             }
                             else
                             {
-                                string backs = string.Empty;
-                                for (int j = 0; j < fullKey.Length; j++)
-                                {
-                                    backs += "{BACKSPACE}";
-                                }
-                                SendKeys.SendWait($"{backs}{keys}");
+                                SendKeys.SendWait(keys);
+                            }
+                            if (shortKey.CursorLeftCount > 0)
+                            {
+                                SendKeys.SendWait($"{{LEFT {shortKey.CursorLeftCount}}}");
                             }
                             break;
                         }
                     }
                 }
             }
+        }
+
+        public static string PerformNewLineFix(string shortKeyText)
+        {
+            string result = shortKeyText;
+            result = result.Replace("\r\n", "\r\r\n");
+            result = result.Replace("\r\r", string.Empty);
+            return result;
+        }
+
+        private string TextToShortKey(string fullKey)
+        {
+            string result = fullKey;
+            result = result.Replace("`", "Oemtilde");
+            for (int i = 0; i < 10; i++)
+            {
+                result = result.Replace($"{i}", $"D{i}");
+            }
+            return result;
         }
 
         /// <summary>
@@ -139,7 +155,7 @@ namespace Free_Short_Keys
         /// <param name="e"></param>
         private void timerBufferFlush_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            Flush2File(this.keydumpPath, true);
+            Flush2File();
         }
 
 
@@ -152,17 +168,22 @@ namespace Free_Short_Keys
         /// If the files exists and append is false, the file is overwritten. 
         /// If the file exists and append is true, the data is appended to the file. 
         /// Otherwise, a new file is created.</param>
-        public void Flush2File(string file, bool append)
+        public void Flush2File(bool forced = false)
         {
             try
             {
-                if (keyBuffer.Length > 1000)
+                if (keyBuffer.Length > 1000 || forced)
                 {
-                    string write = keyBuffer.Remove(1000);
-                    keyBuffer = keyBuffer.Remove(0, 1000);
-                    if (this.saveToFile)
+                    int length = Math.Min(keyBuffer.Length, 1000);
+                    string write = keyBuffer;
+                    if (write.Length > length)
                     {
-                        StreamWriter sw = new StreamWriter(file, append);
+                        write = write.Remove(length);
+                    }
+                    keyBuffer = keyBuffer.Remove(0, length);
+                    if (this.saveToFile && ShortKeyConfiguration.Default.LogKeysDebug)
+                    {
+                        StreamWriter sw = new StreamWriter(this.keydumpPath, true);
                         sw.Write(write);
                         sw.Close();
                     }
@@ -212,5 +233,50 @@ namespace Free_Short_Keys
         }
         #endregion
 
+
+        public static List<SpecialKey> SpecialKeys = new List<SpecialKey>
+        {
+            new SpecialKey { Key= string.Empty, Codes = new List<string> { string.Empty } },
+            new SpecialKey { Key= "BACKSPACE", Codes = new List<string> { "{BACKSPACE}", "{BS}", "{BKSP}" } },
+            new SpecialKey { Key= "BREAK ", Codes = new List<string> { "{BREAK}" } },
+            new SpecialKey { Key= "CAPS LOCK", Codes = new List<string> { "{CAPSLOCK}" } },
+            new SpecialKey { Key= "DEL or DELETE", Codes = new List<string> { "{DELETE}", "{DEL}" } },
+            new SpecialKey { Key= "DOWN ARROW", Codes = new List<string> { "{DOWN}" } },
+            new SpecialKey { Key= "END", Codes = new List<string> { "{END}" } },
+            new SpecialKey { Key= "ENTER", Codes = new List<string> { "{ENTER}", "~" } },
+            new SpecialKey { Key= "ESC", Codes = new List<string> { "{ESC}" } },
+            new SpecialKey { Key= "HELP", Codes = new List<string> { "{HELP}" } },
+            new SpecialKey { Key= "HOME", Codes = new List<string> { "{HOME}" } },
+            new SpecialKey { Key= "INS or INSERT", Codes = new List<string> { "{INSERT}", "{INS}" } },
+            new SpecialKey { Key= "LEFT ARROW", Codes = new List<string> { "{LEFT}" } },
+            new SpecialKey { Key= "NUM LOCK",Codes =  new List<string> { "{NUMLOCK}" } },
+            new SpecialKey { Key= "PAGE DOWN", Codes = new List<string> { "{PGDN}" } },
+            new SpecialKey { Key= "PAGE UP",Codes =  new List<string> { "{PGUP}" } },
+            //new SpecialKey { Key= "PRINT SCREEN", new List<string> { "{PRTSC}" } },
+            new SpecialKey { Key= "RIGHT ARROW", Codes = new List<string> { "{RIGHT}" } },
+            new SpecialKey { Key= "SCROLL LOCK", Codes = new List<string> { "{SCROLLLOCK}" } },
+            new SpecialKey { Key= "TAB", Codes = new List<string> { "{TAB}" } },
+            new SpecialKey { Key= "UP ARROW", Codes = new List<string> { "{UP}" } },
+            new SpecialKey { Key= "F1", Codes = new List<string> { "F1" } },
+            new SpecialKey { Key= "F2", Codes = new List<string> { "F2" } },
+            new SpecialKey { Key= "F3", Codes = new List<string> { "F3" } },
+            new SpecialKey { Key= "F4", Codes = new List<string> { "F4" } },
+            new SpecialKey { Key= "F5", Codes = new List<string> { "F5" } },
+            new SpecialKey { Key= "F6", Codes = new List<string> { "F6" } },
+            new SpecialKey { Key= "F7", Codes = new List<string> { "F7" } },
+            new SpecialKey { Key= "F8", Codes = new List<string> { "F8" } },
+            new SpecialKey { Key= "F9", Codes = new List<string> { "F9" } },
+            new SpecialKey { Key= "F10", Codes = new List<string> { "F10" } },
+            new SpecialKey { Key= "F11", Codes = new List<string> { "F11" } },
+            new SpecialKey { Key= "F12", Codes = new List<string> { "F12" } },
+            new SpecialKey { Key= "F13", Codes = new List<string> { "F13" } },
+            new SpecialKey { Key= "F14", Codes = new List<string> { "F14" } },
+            new SpecialKey { Key= "F15", Codes = new List<string> { "F15" } },
+            new SpecialKey { Key= "F16", Codes = new List<string> { "F16" } },
+            new SpecialKey { Key= "Keypad add", Codes = new List<string> { "{ADD}" } },
+            new SpecialKey { Key= "Keypad subtract", Codes = new List<string> { "{SUBTRACT}" } },
+            new SpecialKey { Key= "Keypad multiply", Codes = new List<string> { "{MULTIPLY}" } },
+            new SpecialKey { Key= "Keypad divide", Codes = new List<string> { "{DIVIDE}" } },
+        };
     }
 }

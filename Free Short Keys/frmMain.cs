@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Reflection;
@@ -16,23 +17,26 @@ namespace Free_Short_Keys
     /// </summary>
     public partial class frmMain : Form
     {
+        public static frmMain Me { get; set; }
+
         public frmMain()
         {
+            Me = this;
+
             InitializeComponent();
         }
 
         private async void frmMain_Load(object sender, EventArgs e)
         {
             await ShortKeyConfiguration.Start();
-            txtSuffix.Text = ShortKeyConfiguration.Instance.DefaultSuffix;
-            RefreshBinding();
-            RefreshUpdateButton();
+            txtSuffix.Text = ShortKeyConfiguration.Default.Suffix;
+            RefreshAll();
         }
 
         private void RefreshBinding()
         {
             gridShortKeys.DataSource = null;
-            gridShortKeys.DataSource = ShortKeyConfiguration.Instance.ShortKeys;
+            gridShortKeys.DataSource = ShortKeyConfiguration.GetShortKeys();
         }
 
         private async void btnAdd_Click(object sender, EventArgs e)
@@ -41,17 +45,21 @@ namespace Free_Short_Keys
             frm.SetShortKey(new ShortKey());
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                ShortKey key = frm.GetShortKey();
-                ShortKeyConfiguration.Instance.ShortKeys.Add(key);
-                await ShortKeyConfiguration.Save();
-                RefreshBinding();
-                RefreshUpdateButton();
+                await ShortKeyConfiguration.AddShortKey(frm.GetShortKey());
+                RefreshAll();
             }
+        }
+
+        private void RefreshAll()
+        {
+            RefreshBinding();
+            RefreshUpdateButton();
+            RefreshMenuItems();
         }
 
         private async void btnUpdate_Click(object sender, EventArgs e)
         {
-            ShortKeyConfiguration.Instance.DefaultSuffix = txtSuffix.Text;
+            ShortKeyConfiguration.Default.Suffix = txtSuffix.Text;
             await ShortKeyConfiguration.Save();
             RefreshUpdateButton();
         }
@@ -63,7 +71,7 @@ namespace Free_Short_Keys
 
         private void RefreshUpdateButton()
         {
-            btnUpdate.Enabled = string.Compare(ShortKeyConfiguration.Instance.DefaultSuffix, txtSuffix.Text, StringComparison.InvariantCultureIgnoreCase) != 0;
+            btnUpdate.Enabled = string.Compare(ShortKeyConfiguration.Default.Suffix, txtSuffix.Text, StringComparison.InvariantCultureIgnoreCase) != 0;
         }
 
         private async void btnEdit_Click(object sender, EventArgs e)
@@ -74,23 +82,8 @@ namespace Free_Short_Keys
                 frm.SetShortKey(GetSelectedItem());
                 if (frm.ShowDialog() == DialogResult.OK)
                 {
-                    ShortKey key = frm.GetShortKey();
-                    foreach (var item in ShortKeyConfiguration.Instance.ShortKeys)
-                    {
-                        if (item.Id == key.Id)
-                        {
-                            foreach (PropertyInfo prop in typeof(ShortKey).GetProperties())
-                            {
-                                if (prop.Name != "Id")
-                                {
-                                    prop.SetValue(item, prop.GetValue(key));
-                                }
-                            }
-                        }
-                    }
-                    await ShortKeyConfiguration.Save();
-                    RefreshBinding();
-                    RefreshUpdateButton();
+                    await ShortKeyConfiguration.UpdateShortKey(frm.GetShortKey());
+                    RefreshAll();
                 }
             }
         }
@@ -102,9 +95,7 @@ namespace Free_Short_Keys
 
         private async void btnRemove_Click(object sender, EventArgs e)
         {
-            ShortKey key = GetSelectedItem();
-            ShortKeyConfiguration.Instance.ShortKeys.Remove(key);
-            await ShortKeyConfiguration.Save();
+            await ShortKeyConfiguration.RemoveShortKey(GetSelectedItem());
             RefreshBinding();
         }
 
@@ -116,6 +107,33 @@ namespace Free_Short_Keys
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             new frmAbout().ShowDialog();
+        }
+
+        private void openStoragePathToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (ShortKeyConfiguration.GetDefaultConfigurationDirectory().Length > 0)
+            {
+                Process.Start(ShortKeyConfiguration.GetDefaultConfigurationDirectory());
+            }
+        }
+
+        private async void logKeysdebugToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShortKeyConfiguration.Default.LogKeysDebug = !ShortKeyConfiguration.Default.LogKeysDebug;
+            await ShortKeyConfiguration.Save();
+            RefreshMenuItems();
+        }
+
+        private void RefreshMenuItems()
+        {
+            openStoragePathToolStripMenuItem.Enabled = ShortKeyConfiguration.GetDefaultConfigurationDirectory().Length > 0;
+            logKeysdebugToolStripMenuItem.Checked = ShortKeyConfiguration.Default.LogKeysDebug;
+            flushKeysToLogToolStripMenuItem.Enabled = ShortKeyConfiguration.Default.LogKeysDebug;
+        }
+
+        private void flushKeysToLogToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShortKeyConfiguration.FlushLogs();
         }
     }
 }
