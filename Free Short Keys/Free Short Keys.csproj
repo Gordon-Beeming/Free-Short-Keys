@@ -23,14 +23,14 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>http://clickonceapp.azurewebsites.net/Apps/Free-Short-Keys/</InstallUrl>
-    <UpdateUrl>http://clickonceapp.azurewebsites.net/Apps/Free-Short-Keys/</UpdateUrl>
+    <InstallUrl>https://clickonce.binary-stuff.com/Apps/Free-Short-Keys/</InstallUrl>
+    <UpdateUrl>https://clickonce.binary-stuff.com/Apps/Free-Short-Keys/</UpdateUrl>
     <SupportUrl>https://github.com/Gordon-Beeming/Free-Short-Keys</SupportUrl>
     <ProductName>Free Short Keys</ProductName>
     <PublisherName>Gordon Beeming</PublisherName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>index.htm</WebPage>
-    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationRevision>2</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>

@@ -32,5 +32,10 @@ namespace Free_Short_Keys
         {
             lblAppVersion.Text = $"v{typeof(frmAbout).Assembly.GetName().Version}";
         }
+
+        private void lnkClickOnceAppSite_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("https://clickonce.binary-stuff.com/");
+        }
     }
 }
