@@ -33,6 +33,13 @@ namespace Free_Short_Keys
             {
                 throw new Exception("Key must be more than a 1 character long.");
             }
+            foreach (var ch in Key)
+            {
+                if (!char.IsNumber(ch) && !char.IsLetter(ch))
+                {
+                    throw new Exception("Key must only contain numbers and letters.");
+                }
+            }
         }
     }
 }
