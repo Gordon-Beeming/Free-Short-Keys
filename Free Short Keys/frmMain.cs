@@ -107,5 +107,15 @@ namespace Free_Short_Keys
             await ShortKeyConfiguration.Save();
             RefreshBinding();
         }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new frmAbout().ShowDialog();
+        }
     }
 }

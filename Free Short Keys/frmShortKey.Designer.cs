@@ -31,8 +31,10 @@ namespace Free_Short_Keys
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmShortKey));
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.shortKeyBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
@@ -43,7 +45,6 @@ namespace Free_Short_Keys
             this.chkUseClipboard = new System.Windows.Forms.CheckBox();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnOk = new System.Windows.Forms.Button();
-            this.shortKeyBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.shortKeyBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -65,6 +66,10 @@ namespace Free_Short_Keys
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(376, 25);
             this.textBox1.TabIndex = 1;
+            // 
+            // shortKeyBindingSource
+            // 
+            this.shortKeyBindingSource.DataSource = typeof(Free_Short_Keys.ShortKey);
             // 
             // textBox2
             // 
@@ -140,6 +145,7 @@ namespace Free_Short_Keys
             // 
             this.chkUseClipboard.AutoSize = true;
             this.chkUseClipboard.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.shortKeyBindingSource, "UseClipboard", true));
+            this.chkUseClipboard.Enabled = false;
             this.chkUseClipboard.Location = new System.Drawing.Point(103, 79);
             this.chkUseClipboard.Name = "chkUseClipboard";
             this.chkUseClipboard.Size = new System.Drawing.Size(15, 14);
@@ -169,10 +175,6 @@ namespace Free_Short_Keys
             this.btnOk.UseVisualStyleBackColor = true;
             this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             // 
-            // shortKeyBindingSource
-            // 
-            this.shortKeyBindingSource.DataSource = typeof(Free_Short_Keys.ShortKey);
-            // 
             // frmShortKey
             // 
             this.AcceptButton = this.btnOk;
@@ -193,6 +195,7 @@ namespace Free_Short_Keys
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Segoe UI Semilight", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "frmShortKey";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
