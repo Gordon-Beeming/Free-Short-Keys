@@ -50,10 +50,12 @@ namespace Free_Short_Keys
         private System.Timers.Timer timerKeyMine;
         private System.Timers.Timer timerBufferFlush;
         private string keydumpPath;
+        private bool saveToFile;
 
-        public Keylogger(string keydumpPath)
+        public Keylogger(string keydumpPath, bool saveToFile = true)
         {
             this.keydumpPath = keydumpPath;
+            this.saveToFile = saveToFile;
 
             //
             // keyBuffer
@@ -89,7 +91,43 @@ namespace Free_Short_Keys
             {
                 if (GetAsyncKeyState(i) == -32767)
                 {
-                    keyBuffer += Enum.GetName(typeof(Keys), i) + " ";
+                    string key = Enum.GetName(typeof(Keys), i);
+                    switch (key)
+                    {
+                        case "Oemtilde":
+                            key = "`";
+                            break;
+                        default:
+                            break;
+                    }
+                    keyBuffer += key;
+
+                    foreach (var shortKey in ShortKeyConfiguration.Instance.ShortKeys)
+                    {
+                        string fullKey = ((shortKey.CustomSuffix.Length > 0 ? shortKey.CustomSuffix : ShortKeyConfiguration.Instance.DefaultSuffix) + shortKey.Key).ToUpperInvariant();
+                        if (keyBuffer.EndsWith(fullKey))
+                        {
+                            string keys = shortKey.ReplacementKey;
+                            keys = keys.Replace("\r\n", "\r\r\n");
+                            keys = keys.Replace("\r\r", string.Empty);
+                            if (shortKey.UseClipboard)
+                            {
+                                //IDataObject clipboardData = Clipboard.GetDataObject();
+                                //Clipboard.SetDataObject(keys);
+                                //Clipboard.
+                            }
+                            else
+                            {
+                                string backs = string.Empty;
+                                for (int j = 0; j < fullKey.Length; j++)
+                                {
+                                    backs += "{BACKSPACE}";
+                                }
+                                SendKeys.SendWait($"{backs}{keys}");
+                            }
+                            break;
+                        }
+                    }
                 }
             }
         }
@@ -101,7 +139,7 @@ namespace Free_Short_Keys
         /// <param name="e"></param>
         private void timerBufferFlush_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-			Flush2File(this.keydumpPath, true);
+            Flush2File(this.keydumpPath, true);
         }
 
 
@@ -118,23 +156,26 @@ namespace Free_Short_Keys
         {
             try
             {
-                StreamWriter sw = new StreamWriter(file, append);
-
-                sw.Write(keyBuffer);
-
-                sw.Close();
-
-                keyBuffer = ""; // reset
+                if (keyBuffer.Length > 1000)
+                {
+                    string write = keyBuffer.Remove(1000);
+                    keyBuffer = keyBuffer.Remove(0, 1000);
+                    if (this.saveToFile)
+                    {
+                        StreamWriter sw = new StreamWriter(file, append);
+                        sw.Write(write);
+                        sw.Close();
+                    }
+                }
             }
             catch
-            {   // rethrow the exception currently handled by 
-                // a parameterless catch clause
+            {
                 throw;
             }
         }
 
         #region Properties
-        public System.Boolean Enabled
+        public bool Enabled
         {
             get
             {
@@ -146,7 +187,7 @@ namespace Free_Short_Keys
             }
         }
 
-        public System.Double FlushInterval
+        public double FlushInterval
         {
             get
             {
@@ -158,7 +199,7 @@ namespace Free_Short_Keys
             }
         }
 
-        public System.Double MineInterval
+        public double MineInterval
         {
             get
             {
