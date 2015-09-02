@@ -101,7 +101,7 @@ namespace Free_Short_Keys
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Application.Exit();
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -134,6 +134,31 @@ namespace Free_Short_Keys
         private void flushKeysToLogToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ShortKeyConfiguration.FlushLogs();
+        }
+
+        private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                e.Cancel = true;
+                ShowHideApp(true);
+            }
+        }
+
+        private void notifyIcon1_DoubleClick(object sender, EventArgs e)
+        {
+            ShowHideApp(false);
+        }
+
+        private void ShowHideApp(bool hideApp)
+        {
+            this.Visible = !hideApp;
+            notifyIcon1.Visible = hideApp;
+        }
+
+        private void exitToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

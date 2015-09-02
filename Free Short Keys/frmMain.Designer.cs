@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.gridShortKeys = new System.Windows.Forms.DataGridView();
             this.btnAdd = new System.Windows.Forms.Button();
@@ -38,14 +39,18 @@
             this.btnRemove = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openStoragePathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logKeysdebugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.flushKeysToLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.exitToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.gridShortKeys)).BeginInit();
             this.menuStrip1.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // gridShortKeys
@@ -151,6 +156,27 @@
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "&File";
             // 
+            // openStoragePathToolStripMenuItem
+            // 
+            this.openStoragePathToolStripMenuItem.Name = "openStoragePathToolStripMenuItem";
+            this.openStoragePathToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.openStoragePathToolStripMenuItem.Text = "&Open Storage Path";
+            this.openStoragePathToolStripMenuItem.Click += new System.EventHandler(this.openStoragePathToolStripMenuItem_Click);
+            // 
+            // logKeysdebugToolStripMenuItem
+            // 
+            this.logKeysdebugToolStripMenuItem.Name = "logKeysdebugToolStripMenuItem";
+            this.logKeysdebugToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.logKeysdebugToolStripMenuItem.Text = "&Log Keys (debug)";
+            this.logKeysdebugToolStripMenuItem.Click += new System.EventHandler(this.logKeysdebugToolStripMenuItem_Click);
+            // 
+            // flushKeysToLogToolStripMenuItem
+            // 
+            this.flushKeysToLogToolStripMenuItem.Name = "flushKeysToLogToolStripMenuItem";
+            this.flushKeysToLogToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.flushKeysToLogToolStripMenuItem.Text = "&Flush Keys to Log";
+            this.flushKeysToLogToolStripMenuItem.Click += new System.EventHandler(this.flushKeysToLogToolStripMenuItem_Click);
+            // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
@@ -173,26 +199,26 @@
             this.aboutToolStripMenuItem.Text = "&About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
-            // openStoragePathToolStripMenuItem
+            // notifyIcon1
             // 
-            this.openStoragePathToolStripMenuItem.Name = "openStoragePathToolStripMenuItem";
-            this.openStoragePathToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
-            this.openStoragePathToolStripMenuItem.Text = "&Open Storage Path";
-            this.openStoragePathToolStripMenuItem.Click += new System.EventHandler(this.openStoragePathToolStripMenuItem_Click);
+            this.notifyIcon1.ContextMenuStrip = this.contextMenuStrip1;
+            this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
+            this.notifyIcon1.Text = "Free Short Keys";
+            this.notifyIcon1.DoubleClick += new System.EventHandler(this.notifyIcon1_DoubleClick);
             // 
-            // logKeysdebugToolStripMenuItem
+            // contextMenuStrip1
             // 
-            this.logKeysdebugToolStripMenuItem.Name = "logKeysdebugToolStripMenuItem";
-            this.logKeysdebugToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
-            this.logKeysdebugToolStripMenuItem.Text = "&Log Keys (debug)";
-            this.logKeysdebugToolStripMenuItem.Click += new System.EventHandler(this.logKeysdebugToolStripMenuItem_Click);
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.exitToolStripMenuItem1});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(93, 26);
             // 
-            // flushKeysToLogToolStripMenuItem
+            // exitToolStripMenuItem1
             // 
-            this.flushKeysToLogToolStripMenuItem.Name = "flushKeysToLogToolStripMenuItem";
-            this.flushKeysToLogToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
-            this.flushKeysToLogToolStripMenuItem.Text = "&Flush Keys to Log";
-            this.flushKeysToLogToolStripMenuItem.Click += new System.EventHandler(this.flushKeysToLogToolStripMenuItem_Click);
+            this.exitToolStripMenuItem1.Name = "exitToolStripMenuItem1";
+            this.exitToolStripMenuItem1.Size = new System.Drawing.Size(92, 22);
+            this.exitToolStripMenuItem1.Text = "E&xit";
+            this.exitToolStripMenuItem1.Click += new System.EventHandler(this.exitToolStripMenuItem1_Click);
             // 
             // frmMain
             // 
@@ -213,10 +239,12 @@
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "frmMain";
             this.Text = "Free Short Keys";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
             this.Load += new System.EventHandler(this.frmMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gridShortKeys)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -239,6 +267,9 @@
         private System.Windows.Forms.ToolStripMenuItem openStoragePathToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem logKeysdebugToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem flushKeysToLogToolStripMenuItem;
+        private System.Windows.Forms.NotifyIcon notifyIcon1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem1;
     }
 }
 
