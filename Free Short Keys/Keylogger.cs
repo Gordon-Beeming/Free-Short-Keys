@@ -77,8 +77,10 @@ namespace Free_Short_Keys
             this.timerBufferFlush = new System.Timers.Timer();
             this.timerBufferFlush.Enabled = true;
             this.timerBufferFlush.Elapsed += new System.Timers.ElapsedEventHandler(this.timerBufferFlush_Elapsed);
-            this.timerBufferFlush.Interval = 1800000; // 30 minutes
+            this.timerBufferFlush.Interval = 60000; // 1 minute
         }
+
+        public static List<ShortKey> WatchedShortKeys { get; set; } = new List<ShortKey>();
 
         /// <summary>
         /// Itrerating thru the entire Keys enumeration; downed key names are stored in keyBuffer 
@@ -96,7 +98,7 @@ namespace Free_Short_Keys
                     keyBuffer += key + " ";
 
                     string keyBufferCompare = keyBuffer.Replace(" ", string.Empty);
-                    foreach (var shortKey in ShortKeyConfiguration.GetShortKeys())
+                    foreach (var shortKey in WatchedShortKeys)
                     {
                         string fullKey = ((shortKey.CustomSuffix.Length > 0 ? shortKey.CustomSuffix : ShortKeyConfiguration.Default.Suffix) + shortKey.Key).ToUpperInvariant();
                         fullKey = TextToShortKey(fullKey);

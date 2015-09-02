@@ -58,7 +58,7 @@ namespace Free_Short_Keys
                     }
                 }
             }
-
+            Keylogger.WatchedShortKeys = GetShortKeys();
             keylogger = new Keylogger(Path.Combine(GetDefaultConfigurationDirectory(),"keys.log"), true);
             keylogger.Enabled = true;
             keylogger.FlushInterval = 60000;
@@ -86,6 +86,7 @@ namespace Free_Short_Keys
                 string categoryFileName = GetFileSafeName(category);
                 await Storage.WriteData(null, $"{categoryFileName}{CategoryFileExtension}", CapturedShortKeys[category]);
             }
+            Keylogger.WatchedShortKeys = GetShortKeys();
         }
 
         private static string GetFileSafeName(string category)
@@ -107,6 +108,10 @@ namespace Free_Short_Keys
             if (CapturedShortKeys.ContainsKey(key.Category))
             {
                 CapturedShortKeys[key.Category].Add(key);
+            }
+            else 
+            {
+                CapturedShortKeys.Add(key.Category, new List<ShortKey>() { key });
             }
             await Save();
         }
