@@ -141,6 +141,25 @@ namespace Free_Short_Keys
         {
             string result = fullKey;
             result = result.Replace("`", "Oemtilde");
+            result = result.Replace("-", "OemMinus");
+            result = result.Replace("+", "Oemplus");
+            result = result.Replace("_", "OemMinus");
+            result = result.Replace("=", "Oemplus");
+            result = result.Replace("{", "Oem4");
+            result = result.Replace("}", "Oem5");
+            result = result.Replace("[", "Oem4");
+            result = result.Replace("[", "Oem5");
+            result = result.Replace(";", "OemSemicolon");
+            result = result.Replace("'", "OemQuotes");
+            result = result.Replace("\\", "OemPipe");
+            result = result.Replace(":", "OemSemicolon");
+            result = result.Replace("\"", "OemQuotes");
+            result = result.Replace("|", "OemPipe");
+            result = result.Replace("/", "Divide");
+            result = result.Replace("*", "Multiply");
+            result = result.Replace("-", "Subtract");
+            result = result.Replace("+", "Add");
+            result = result.Replace(".", "Decimal");
             for (int i = 0; i < 10; i++)
             {
                 result = result.Replace($"{i}", $"D{i}");
