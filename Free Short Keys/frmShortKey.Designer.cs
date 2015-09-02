@@ -59,7 +59,7 @@ namespace Free_Short_Keys
             this.label1.Location = new System.Drawing.Point(11, 46);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(28, 17);
-            this.label1.TabIndex = 0;
+            this.label1.TabIndex = 2;
             this.label1.Text = "Key";
             // 
             // txtKey
@@ -70,7 +70,7 @@ namespace Free_Short_Keys
             this.txtKey.Location = new System.Drawing.Point(102, 43);
             this.txtKey.Name = "txtKey";
             this.txtKey.Size = new System.Drawing.Size(376, 25);
-            this.txtKey.TabIndex = 1;
+            this.txtKey.TabIndex = 3;
             // 
             // shortKeyBindingSource
             // 
@@ -84,7 +84,7 @@ namespace Free_Short_Keys
             this.txtSuffix.Location = new System.Drawing.Point(102, 74);
             this.txtSuffix.Name = "txtSuffix";
             this.txtSuffix.Size = new System.Drawing.Size(376, 25);
-            this.txtSuffix.TabIndex = 3;
+            this.txtSuffix.TabIndex = 5;
             // 
             // label2
             // 
@@ -92,7 +92,7 @@ namespace Free_Short_Keys
             this.label2.Location = new System.Drawing.Point(11, 77);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(39, 17);
-            this.label2.TabIndex = 2;
+            this.label2.TabIndex = 4;
             this.label2.Text = "Suffix";
             // 
             // label3
@@ -101,7 +101,7 @@ namespace Free_Short_Keys
             this.label3.Location = new System.Drawing.Point(11, 133);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(105, 17);
-            this.label3.TabIndex = 6;
+            this.label3.TabIndex = 8;
             this.label3.Text = "Replacement Key";
             // 
             // txtNotes
@@ -115,7 +115,7 @@ namespace Free_Short_Keys
             this.txtNotes.Multiline = true;
             this.txtNotes.Name = "txtNotes";
             this.txtNotes.Size = new System.Drawing.Size(468, 95);
-            this.txtNotes.TabIndex = 9;
+            this.txtNotes.TabIndex = 13;
             // 
             // label4
             // 
@@ -124,7 +124,7 @@ namespace Free_Short_Keys
             this.label4.Location = new System.Drawing.Point(11, 291);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(40, 17);
-            this.label4.TabIndex = 8;
+            this.label4.TabIndex = 12;
             this.label4.Text = "Notes";
             // 
             // label5
@@ -133,7 +133,7 @@ namespace Free_Short_Keys
             this.label5.Location = new System.Drawing.Point(11, 108);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(85, 17);
-            this.label5.TabIndex = 4;
+            this.label5.TabIndex = 6;
             this.label5.Text = "Use Keyboard";
             // 
             // chkUseClipboard
@@ -143,7 +143,7 @@ namespace Free_Short_Keys
             this.chkUseClipboard.Location = new System.Drawing.Point(102, 110);
             this.chkUseClipboard.Name = "chkUseClipboard";
             this.chkUseClipboard.Size = new System.Drawing.Size(15, 14);
-            this.chkUseClipboard.TabIndex = 5;
+            this.chkUseClipboard.TabIndex = 7;
             this.chkUseClipboard.UseVisualStyleBackColor = true;
             // 
             // btnCancel
@@ -153,7 +153,7 @@ namespace Free_Short_Keys
             this.btnCancel.Location = new System.Drawing.Point(404, 412);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 11;
+            this.btnCancel.TabIndex = 16;
             this.btnCancel.Text = "cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -164,7 +164,7 @@ namespace Free_Short_Keys
             this.btnOk.Location = new System.Drawing.Point(323, 412);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(75, 23);
-            this.btnOk.TabIndex = 10;
+            this.btnOk.TabIndex = 15;
             this.btnOk.Text = "ok";
             this.btnOk.UseVisualStyleBackColor = true;
             this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
@@ -175,7 +175,7 @@ namespace Free_Short_Keys
             this.label6.Location = new System.Drawing.Point(11, 15);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(59, 17);
-            this.label6.TabIndex = 12;
+            this.label6.TabIndex = 0;
             this.label6.Text = "Category";
             // 
             // cbxCategory
@@ -187,7 +187,7 @@ namespace Free_Short_Keys
             this.cbxCategory.Location = new System.Drawing.Point(102, 12);
             this.cbxCategory.Name = "cbxCategory";
             this.cbxCategory.Size = new System.Drawing.Size(377, 25);
-            this.cbxCategory.TabIndex = 13;
+            this.cbxCategory.TabIndex = 1;
             // 
             // label7
             // 
@@ -195,7 +195,7 @@ namespace Free_Short_Keys
             this.label7.Location = new System.Drawing.Point(171, 128);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(77, 17);
-            this.label7.TabIndex = 14;
+            this.label7.TabIndex = 9;
             this.label7.Text = "Special Keys";
             // 
             // cbxInsertKey
@@ -207,7 +207,7 @@ namespace Free_Short_Keys
             this.cbxInsertKey.Location = new System.Drawing.Point(254, 125);
             this.cbxInsertKey.Name = "cbxInsertKey";
             this.cbxInsertKey.Size = new System.Drawing.Size(224, 25);
-            this.cbxInsertKey.TabIndex = 15;
+            this.cbxInsertKey.TabIndex = 10;
             this.cbxInsertKey.SelectedIndexChanged += new System.EventHandler(this.cbxInsertKey_SelectedIndexChanged);
             // 
             // txtReplacementKey
@@ -222,7 +222,7 @@ namespace Free_Short_Keys
             this.txtReplacementKey.Multiline = true;
             this.txtReplacementKey.Name = "txtReplacementKey";
             this.txtReplacementKey.Size = new System.Drawing.Size(467, 135);
-            this.txtReplacementKey.TabIndex = 7;
+            this.txtReplacementKey.TabIndex = 11;
             // 
             // chkSaveRepalcementKeyCursorPosition
             // 
@@ -230,7 +230,7 @@ namespace Free_Short_Keys
             this.chkSaveRepalcementKeyCursorPosition.Location = new System.Drawing.Point(12, 414);
             this.chkSaveRepalcementKeyCursorPosition.Name = "chkSaveRepalcementKeyCursorPosition";
             this.chkSaveRepalcementKeyCursorPosition.Size = new System.Drawing.Size(235, 21);
-            this.chkSaveRepalcementKeyCursorPosition.TabIndex = 16;
+            this.chkSaveRepalcementKeyCursorPosition.TabIndex = 14;
             this.chkSaveRepalcementKeyCursorPosition.Text = "Save repalcement key cursor position";
             this.chkSaveRepalcementKeyCursorPosition.UseVisualStyleBackColor = true;
             // 
