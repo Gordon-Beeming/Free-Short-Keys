@@ -28,12 +28,12 @@ namespace Free_Short_Keys
             cbxInsertKey.DisplayMember = "Key";
         }
 
-        public void SetShortKey(ShortKey key)
+        public void SetShortKey(ShortKey key, bool newShortKey)
         {
             cbxCategory.DataSource = ShortKeyConfiguration.GetCategories();
             shortKeyBindingSource.DataSource = key;
             cbxCategory.Text = key.Category;
-            cbxCategory.Enabled = false;
+            cbxCategory.Enabled = newShortKey;
         }
 
         public ShortKey GetShortKey()

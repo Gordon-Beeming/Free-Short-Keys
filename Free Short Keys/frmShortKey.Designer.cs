@@ -34,6 +34,7 @@ namespace Free_Short_Keys
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmShortKey));
             this.label1 = new System.Windows.Forms.Label();
             this.txtKey = new System.Windows.Forms.TextBox();
+            this.shortKeyBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.txtSuffix = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -49,7 +50,6 @@ namespace Free_Short_Keys
             this.cbxInsertKey = new System.Windows.Forms.ComboBox();
             this.txtReplacementKey = new System.Windows.Forms.TextBox();
             this.chkSaveRepalcementKeyCursorPosition = new System.Windows.Forms.CheckBox();
-            this.shortKeyBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.shortKeyBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -71,6 +71,10 @@ namespace Free_Short_Keys
             this.txtKey.Name = "txtKey";
             this.txtKey.Size = new System.Drawing.Size(376, 25);
             this.txtKey.TabIndex = 1;
+            // 
+            // shortKeyBindingSource
+            // 
+            this.shortKeyBindingSource.DataSource = typeof(Free_Short_Keys.ShortKey);
             // 
             // txtSuffix
             // 
@@ -188,11 +192,11 @@ namespace Free_Short_Keys
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(186, 128);
+            this.label7.Location = new System.Drawing.Point(171, 128);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(62, 17);
+            this.label7.Size = new System.Drawing.Size(77, 17);
             this.label7.TabIndex = 14;
-            this.label7.Text = "Insert Key";
+            this.label7.Text = "Special Keys";
             // 
             // cbxInsertKey
             // 
@@ -229,10 +233,6 @@ namespace Free_Short_Keys
             this.chkSaveRepalcementKeyCursorPosition.TabIndex = 16;
             this.chkSaveRepalcementKeyCursorPosition.Text = "Save repalcement key cursor position";
             this.chkSaveRepalcementKeyCursorPosition.UseVisualStyleBackColor = true;
-            // 
-            // shortKeyBindingSource
-            // 
-            this.shortKeyBindingSource.DataSource = typeof(Free_Short_Keys.ShortKey);
             // 
             // frmShortKey
             // 

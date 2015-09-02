@@ -42,7 +42,7 @@ namespace Free_Short_Keys
         private async void btnAdd_Click(object sender, EventArgs e)
         {
             frmShortKey frm = new frmShortKey();
-            frm.SetShortKey(new ShortKey());
+            frm.SetShortKey(new ShortKey(), true);
             if (frm.ShowDialog() == DialogResult.OK)
             {
                 await ShortKeyConfiguration.AddShortKey(frm.GetShortKey());
@@ -79,7 +79,7 @@ namespace Free_Short_Keys
             if (gridShortKeys.SelectedRows.Count > 0)
             {
                 frmShortKey frm = new frmShortKey();
-                frm.SetShortKey(GetSelectedItem());
+                frm.SetShortKey(GetSelectedItem(), false);
                 if (frm.ShowDialog() == DialogResult.OK)
                 {
                     await ShortKeyConfiguration.UpdateShortKey(frm.GetShortKey());
