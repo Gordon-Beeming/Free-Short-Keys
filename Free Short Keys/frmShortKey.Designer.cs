@@ -262,7 +262,7 @@ namespace Free_Short_Keys
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "frmShortKey";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Short Key";
+            this.Text = "Short Key - BETA";
             this.Load += new System.EventHandler(this.frmShortKey_Load);
             ((System.ComponentModel.ISupportInitialize)(this.shortKeyBindingSource)).EndInit();
             this.ResumeLayout(false);
