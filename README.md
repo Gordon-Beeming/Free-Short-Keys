@@ -2,6 +2,8 @@
 
 A open free short keys application
 
+*Please note that because this is still in BETA there are some rough edges around the keys used for the prefix and suffix, we are working on these and will publish an update when done*
+
 ## Install
 
 Head over to [https://clickonce.binary-stuff.com/](https://clickonce.binary-stuff.com/) and download the latest click once deployment of this application.
@@ -17,7 +19,7 @@ The opening window is very basic and just lists all your short keys
 
 ![opening window](images/001.png)
 
-- You can change the default suffix for your short key binds
+- You can change the prefix for your short key binds
 - You can also then Edit or Remove a short key by selecting one and clicking on the **edit** or **remove** buttons.
 - Lastly you can add new short keys by clicking on the add button.
 
@@ -32,7 +34,7 @@ Next we'll take a look at the add/edit a short key window
 - You are able to set what the keys are that trigger your short key
 	- At the moment this is limited to numbers and letters
 	- Your key needs to be 2 or more characters long
-- If you don't want to use the default suffix that you have globally set you can override it here for a specific short key 
+- You can optionally add a suffix to the end of your short key 
 - You get the option to have your replacement key pasted in with the clip board or typed out
 	- If you want to use Special Keys you will need to leave this unchecked
 - You then get the replacement key that you would like to use for the current short key

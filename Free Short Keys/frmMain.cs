@@ -143,6 +143,10 @@ namespace Free_Short_Keys
                 e.Cancel = true;
                 ShowHideApp(true);
             }
+            else
+            {
+                notifyIcon1.Visible = false;
+            }
         }
 
         private void notifyIcon1_DoubleClick(object sender, EventArgs e)

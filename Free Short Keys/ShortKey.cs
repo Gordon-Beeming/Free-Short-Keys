@@ -29,7 +29,7 @@ namespace Free_Short_Keys
         internal void Validate()
         {
             Key = Key.Trim();
-            if (Key.Length <= 2)
+            if (Key.Length <= 1)
             {
                 throw new Exception("Key must be more than a 1 character long.");
             }
