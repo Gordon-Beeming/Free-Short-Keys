@@ -2,7 +2,12 @@
 
 A open free short keys application
 
-*Please note that because this is still in BETA there are some rough edges around the keys used for the prefix and suffix, we are working on these and will publish an update when done*
+*Please note that because this is still in BETA there are some rough edges*
+
+- Some keys used for the prefix and suffix are not detected
+- Some known issues around interacting with Citrix sessions 
+
+We are working on these and will publish an update when done
 
 ## Install
 

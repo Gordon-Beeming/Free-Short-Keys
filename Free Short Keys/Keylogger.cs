@@ -147,7 +147,7 @@ namespace Free_Short_Keys
 
         private string ReplaceSendKeysSpecialCharacter(string input, string specialCharacter)
         {
-            return input.Replace(specialCharacter, "{"+ specialCharacter + "}");
+            return input.Replace(specialCharacter, "{" + specialCharacter + "}");
         }
 
         private string ReplaceRegexPatterns(string shortKeyText)
@@ -173,8 +173,8 @@ namespace Free_Short_Keys
         public static string PerformNewLineFix(string shortKeyText)
         {
             string result = shortKeyText;
-            result = result.Replace("\r\n", "\r\r\n");
-            result = result.Replace("\r\r", string.Empty);
+            result = result.Replace("\r\n", " \r\n");
+            //result = result.Replace("\r\r", string.Empty);
             return result;
         }
 
