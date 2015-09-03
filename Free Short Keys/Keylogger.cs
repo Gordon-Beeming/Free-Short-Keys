@@ -120,6 +120,7 @@ namespace Free_Short_Keys
                             }
                             else
                             {
+                                keys = ReplaceSendKeysSpecialCharacters(keys);
                                 SendKeys.SendWait(keys);
                             }
                             if (shortKey.CursorLeftCount > 0)
@@ -131,6 +132,22 @@ namespace Free_Short_Keys
                     }
                 }
             }
+        }
+
+        private string ReplaceSendKeysSpecialCharacters(string keys)
+        {
+            keys = ReplaceSendKeysSpecialCharacter(keys, "+");
+            keys = ReplaceSendKeysSpecialCharacter(keys, "^");
+            keys = ReplaceSendKeysSpecialCharacter(keys, "%");
+            keys = ReplaceSendKeysSpecialCharacter(keys, "~");
+            keys = ReplaceSendKeysSpecialCharacter(keys, "(");
+            keys = ReplaceSendKeysSpecialCharacter(keys, ")");
+            return keys;
+        }
+
+        private string ReplaceSendKeysSpecialCharacter(string input, string specialCharacter)
+        {
+            return input.Replace(specialCharacter, "{"+ specialCharacter + "}");
         }
 
         private string ReplaceRegexPatterns(string shortKeyText)
