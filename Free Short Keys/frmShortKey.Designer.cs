@@ -34,7 +34,6 @@ namespace Free_Short_Keys
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmShortKey));
             this.label1 = new System.Windows.Forms.Label();
             this.txtKey = new System.Windows.Forms.TextBox();
-            this.shortKeyBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.txtSuffix = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -50,6 +49,7 @@ namespace Free_Short_Keys
             this.cbxInsertKey = new System.Windows.Forms.ComboBox();
             this.txtReplacementKey = new System.Windows.Forms.TextBox();
             this.chkSaveRepalcementKeyCursorPosition = new System.Windows.Forms.CheckBox();
+            this.shortKeyBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.shortKeyBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -72,15 +72,11 @@ namespace Free_Short_Keys
             this.txtKey.Size = new System.Drawing.Size(376, 25);
             this.txtKey.TabIndex = 3;
             // 
-            // shortKeyBindingSource
-            // 
-            this.shortKeyBindingSource.DataSource = typeof(Free_Short_Keys.ShortKey);
-            // 
             // txtSuffix
             // 
             this.txtSuffix.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtSuffix.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.shortKeyBindingSource, "CustomSuffix", true));
+            this.txtSuffix.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.shortKeyBindingSource, "Suffix", true));
             this.txtSuffix.Location = new System.Drawing.Point(102, 74);
             this.txtSuffix.Name = "txtSuffix";
             this.txtSuffix.Size = new System.Drawing.Size(376, 25);
@@ -233,6 +229,10 @@ namespace Free_Short_Keys
             this.chkSaveRepalcementKeyCursorPosition.TabIndex = 14;
             this.chkSaveRepalcementKeyCursorPosition.Text = "Save replacement key cursor position";
             this.chkSaveRepalcementKeyCursorPosition.UseVisualStyleBackColor = true;
+            // 
+            // shortKeyBindingSource
+            // 
+            this.shortKeyBindingSource.DataSource = typeof(Free_Short_Keys.ShortKey);
             // 
             // frmShortKey
             // 
