@@ -26,7 +26,7 @@ namespace Free_Short_Keys
         }
 
         public static List<string> GetCategories()
-        {            
+        {
             return CapturedShortKeys.Keys.ToList();
         }
 
@@ -39,7 +39,7 @@ namespace Free_Short_Keys
             {
                 await Save();
             }
-            Default = await Storage.ReadData<DefaultConfig>(null, DefaultConfigurationFileName);            
+            Default = await Storage.ReadData<DefaultConfig>(null, DefaultConfigurationFileName);
             if (GetDefaultConfigurationDirectory().Length > 0)
             {
                 foreach (var file in Directory.GetFiles(GetDefaultConfigurationDirectory(), $"*{CategoryFileExtension}", SearchOption.TopDirectoryOnly))
@@ -59,7 +59,7 @@ namespace Free_Short_Keys
                 }
             }
             Keylogger.WatchedShortKeys = GetShortKeys();
-            keylogger = new Keylogger(Path.Combine(GetDefaultConfigurationDirectory(),"keys.log"), true);
+            keylogger = new Keylogger(Path.Combine(GetDefaultConfigurationDirectory(), "keys.log"), true);
             keylogger.Enabled = true;
             keylogger.FlushInterval = 60000;
         }
@@ -109,7 +109,7 @@ namespace Free_Short_Keys
             {
                 CapturedShortKeys[key.Category].Add(key);
             }
-            else 
+            else
             {
                 CapturedShortKeys.Add(key.Category, new List<ShortKey>() { key });
             }
@@ -122,16 +122,14 @@ namespace Free_Short_Keys
             {
                 CapturedShortKeys.Add(key.Category, new List<ShortKey>());
             }
-            foreach (var item in CapturedShortKeys[key.Category])
+            var shortKey = FindShortKey(key);
+            if (shortKey != null)
             {
-                if (item.Id == key.Id)
+                foreach (PropertyInfo prop in typeof(ShortKey).GetProperties())
                 {
-                    foreach (PropertyInfo prop in typeof(ShortKey).GetProperties())
+                    if (prop.Name != "Id" && prop.Name != "Category")
                     {
-                        if (prop.Name != "Id" && prop.Name != "Category")
-                        {
-                            prop.SetValue(item, prop.GetValue(key));
-                        }
+                        prop.SetValue(shortKey, prop.GetValue(key));
                     }
                 }
             }
@@ -140,11 +138,17 @@ namespace Free_Short_Keys
 
         public static async Task RemoveShortKey(ShortKey key)
         {
-            foreach (var item in CapturedShortKeys[key.Category])
+            var shortKey = FindShortKey(key);
+            if (shortKey != null)
             {
-                CapturedShortKeys[key.Category].Remove(key);
+                CapturedShortKeys[key.Category].Remove(shortKey);
+                await Save();
             }
-            await Save();
+        }
+
+        private static ShortKey FindShortKey(ShortKey key)
+        {
+            return CapturedShortKeys[key.Category].FirstOrDefault(o => o.Id == key.Id);
         }
 
         public static void FlushLogs()
