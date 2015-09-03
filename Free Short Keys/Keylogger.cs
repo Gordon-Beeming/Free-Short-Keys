@@ -13,6 +13,7 @@ using System.IO;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace Free_Short_Keys
 {
@@ -100,12 +101,13 @@ namespace Free_Short_Keys
                     string keyBufferCompare = keyBuffer.Replace(" ", string.Empty);
                     foreach (var shortKey in WatchedShortKeys)
                     {
-                        string fullKey = ((shortKey.CustomSuffix.Length > 0 ? shortKey.CustomSuffix : ShortKeyConfiguration.Default.Suffix) + shortKey.Key).ToUpperInvariant();
+                        string fullKey = (ShortKeyConfiguration.Default.Prefix + shortKey.Key + shortKey.Suffix).ToUpperInvariant();
                         fullKey = TextToShortKey(fullKey);
                         if (keyBufferCompare.EndsWith(fullKey))
                         {
                             SendKeys.SendWait($"{{BACKSPACE {fullKey.Length}}}");
                             string keys = PerformNewLineFix(shortKey.ReplacementKey);
+                            keys = ReplaceRegexPatterns(keys);
                             if (shortKey.UseClipboard)
                             {
                                 frmMain.Me.Invoke(new Action(() =>
@@ -129,6 +131,26 @@ namespace Free_Short_Keys
                     }
                 }
             }
+        }
+
+        private string ReplaceRegexPatterns(string shortKeyText)
+        {
+            string result = shortKeyText;
+            result = ReplaceRegexPattern(result, @"\[Date\:(?<regex>.+)\]", (format) => DateTime.Now.ToString(format));
+            return result;
+        }
+
+        private string ReplaceRegexPattern(string input, string pattern, Func<string, string> getReplaceText)
+        {
+            string result = input;
+            var match = Regex.Match(input, pattern, RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
+            if (match.Success)
+            {
+                var replaceText = getReplaceText(match.Groups["regex"].Value);
+                result = result.Remove(match.Index, match.Length);
+                result = result.Insert(match.Index, replaceText);
+            }
+            return result;
         }
 
         public static string PerformNewLineFix(string shortKeyText)
@@ -162,6 +184,16 @@ namespace Free_Short_Keys
             result = result.Replace("-", "Subtract");
             result = result.Replace("+", "Add");
             result = result.Replace(".", "Decimal");
+            result = result.Replace("!", "ShiftKeyD1");
+            result = result.Replace("@", "ShiftKeyD2");
+            result = result.Replace("#", "ShiftKeyD3");
+            result = result.Replace("$", "ShiftKeyD4");
+            result = result.Replace("%", "ShiftKeyD5");
+            result = result.Replace("^", "ShiftKeyD6");
+            result = result.Replace("&", "ShiftKeyD7");
+            result = result.Replace("*", "ShiftKeyD8");
+            result = result.Replace("(", "ShiftKeyD9");
+            result = result.Replace(")", "ShiftKeyD0");
             for (int i = 0; i < 10; i++)
             {
                 result = result.Replace($"{i}", $"D{i}");

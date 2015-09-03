@@ -14,7 +14,7 @@ namespace Free_Short_Keys
         [DisplayName("Replacement Key")]
         public string ReplacementKey { get; set; } = string.Empty;
         [DisplayName("Suffix")]
-        public string CustomSuffix { get; set; } = string.Empty;
+        public string Suffix { get; set; } = string.Empty;
         [DisplayName("Notes")]
         public string Notes { get; set; } = string.Empty;
         [DisplayName("Created")]

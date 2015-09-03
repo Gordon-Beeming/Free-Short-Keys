@@ -12,6 +12,6 @@ namespace Free_Short_Keys
         [DisplayName("Log Keys (Debug)")]
         public bool LogKeysDebug { get; set; } = false;
         [DisplayName("Suffix")]
-        public string Suffix { get; set; } = "``";
+        public string Prefix { get; set; } = "``";
     }
 }

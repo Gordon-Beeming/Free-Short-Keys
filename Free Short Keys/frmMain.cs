@@ -29,7 +29,7 @@ namespace Free_Short_Keys
         private async void frmMain_Load(object sender, EventArgs e)
         {
             await ShortKeyConfiguration.Start();
-            txtSuffix.Text = ShortKeyConfiguration.Default.Suffix;
+            txtSuffix.Text = ShortKeyConfiguration.Default.Prefix;
             RefreshAll();
         }
 
@@ -59,7 +59,7 @@ namespace Free_Short_Keys
 
         private async void btnUpdate_Click(object sender, EventArgs e)
         {
-            ShortKeyConfiguration.Default.Suffix = txtSuffix.Text;
+            ShortKeyConfiguration.Default.Prefix = txtSuffix.Text;
             await ShortKeyConfiguration.Save();
             RefreshUpdateButton();
         }
@@ -71,7 +71,7 @@ namespace Free_Short_Keys
 
         private void RefreshUpdateButton()
         {
-            btnUpdate.Enabled = string.Compare(ShortKeyConfiguration.Default.Suffix, txtSuffix.Text, StringComparison.InvariantCultureIgnoreCase) != 0;
+            btnUpdate.Enabled = string.Compare(ShortKeyConfiguration.Default.Prefix, txtSuffix.Text, StringComparison.InvariantCultureIgnoreCase) != 0;
         }
 
         private async void btnEdit_Click(object sender, EventArgs e)

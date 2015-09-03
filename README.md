@@ -41,6 +41,14 @@ Next we'll take a look at the add/edit a short key window
 - We then have a feature that I haven't seen around yet that just feels right. If you check the **Save replacement key cursor position** check box then for the current save we will locate the cursor in the replacement text box and then automatically do left key presses when this short key is used to get back to that exact position.
 	- Unlike other short key solutions when you have the clipboard paste mode on left arrows don't work. With our solution you are still able to get to your ideal place in the replacement text even when using the clipboard mode
 
+#### Magic placeholders
+
+There are a couple of placeholders that do magical things for you, they are listed below
+
+| name | example | how it's used |
+| --- | --- | --- |
+| date | [date:yyyyMMdd] | If your short key is matched this placeholder will be replaced with the format specified after after the colon and does a C# equivalent *DateTime.Now.ToString(format)* |
+
 ### Context Menus
 
 The File context menu has a couple options in it

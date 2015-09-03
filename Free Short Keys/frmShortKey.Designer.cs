@@ -231,7 +231,7 @@ namespace Free_Short_Keys
             this.chkSaveRepalcementKeyCursorPosition.Name = "chkSaveRepalcementKeyCursorPosition";
             this.chkSaveRepalcementKeyCursorPosition.Size = new System.Drawing.Size(235, 21);
             this.chkSaveRepalcementKeyCursorPosition.TabIndex = 14;
-            this.chkSaveRepalcementKeyCursorPosition.Text = "Save repalcement key cursor position";
+            this.chkSaveRepalcementKeyCursorPosition.Text = "Save replacement key cursor position";
             this.chkSaveRepalcementKeyCursorPosition.UseVisualStyleBackColor = true;
             // 
             // frmShortKey
