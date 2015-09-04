@@ -169,7 +169,7 @@ namespace Free_Short_Keys
                                 keys = ReplaceSendKeysSpecialCharacters(keys);
                                 Invoke(() =>
                                 {
-                                    SendKeys.Send(keys);
+                                    SendTheseKeys(keys);
                                 });
                             }
                             if (shortKey.CursorLeftCount > 0)
@@ -183,6 +183,33 @@ namespace Free_Short_Keys
                         }
                     }
                 }
+            }
+        }
+
+        private static void SendTheseKeys(string keys, int count = 1)
+        {
+            //string keysLeft = keys;
+            //while(keysLeft.Length > 0)
+            //{
+            //    var match = Regex.Match(keysLeft, @"\{.+\}", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
+            //    if (match.Success && match.Index == 0)
+            //    {
+            //        SendKeys.Send(match.Value);
+            //        SendKeys.Flush();
+            //        keysLeft = keysLeft.Remove(0, match.Length);
+            //    }
+            //    else
+            //    {
+            //        SendKeys.Send(keysLeft[0].ToString());
+            //        keysLeft = keysLeft.Remove(0, 1);
+            //        SendKeys.Flush();
+            //    }
+            //}
+
+            SendKeys.Send(keys);
+            if (count > 1)
+            {
+                SendTheseKeys(keys, count--);
             }
         }
 
@@ -441,8 +468,9 @@ namespace Free_Short_Keys
         public static string PerformNewLineFix(string shortKeyText)
         {
             string result = shortKeyText;
-            result = result.Replace("\r\n", "\r\n");
-            result = result.Replace("\r\r", string.Empty);
+            result = result.Replace("\r\n", "{ENTER}");
+            result = result.Replace("\r", "{ENTER}");
+            result = result.Replace("\n", "{ENTER}");
             return result;
         }
         
