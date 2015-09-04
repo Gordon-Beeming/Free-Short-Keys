@@ -154,10 +154,14 @@ namespace Free_Short_Keys
                             {
                                 Invoke(() =>
                                 {
-                                    IDataObject clipboardData = Clipboard.GetDataObject();
-                                    Clipboard.SetDataObject(keys);
-                                    SendKeys.Send($"^(v)");
-                                    Clipboard.SetDataObject(clipboardData);
+                                    try
+                                    {
+                                        IDataObject clipboardData = Clipboard.GetDataObject();
+                                        Clipboard.SetDataObject(keys);
+                                        SendKeys.Send($"^(v)");
+                                        Clipboard.SetDataObject(clipboardData);
+                                    }
+                                    catch { }
                                 });
                             }
                             else
@@ -258,6 +262,43 @@ namespace Free_Short_Keys
                             keyBuffer += "0 ";
                             return;
                     }
+                }
+            }
+
+            if (Regex.IsMatch(key, @"NumPad\d"))
+            {
+                switch (key)
+                {
+                    case "NumPad1":
+                        keyBuffer += "1 ";
+                        return;
+                    case "NumPad2":
+                        keyBuffer += "2 ";
+                        return;
+                    case "NumPad3":
+                        keyBuffer += "3 ";
+                        return;
+                    case "NumPad4":
+                        keyBuffer += "4 ";
+                        return;
+                    case "NumPad5":
+                        keyBuffer += "5 ";
+                        return;
+                    case "NumPad6":
+                        keyBuffer += "6 ";
+                        return;
+                    case "NumPad7":
+                        keyBuffer += "7 ";
+                        return;
+                    case "NumPad8":
+                        keyBuffer += "8 ";
+                        return;
+                    case "NumPad9":
+                        keyBuffer += "9 ";
+                        return;
+                    case "NumPad0":
+                        keyBuffer += "0 ";
+                        return;
                 }
             }
             

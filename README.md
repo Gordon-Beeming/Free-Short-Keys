@@ -4,7 +4,7 @@ A open free short keys application
 
 *Please note that because this is still in BETA there are some rough edges*
 
-- Some keys used for the prefix and suffix are not detected
+- For some applications the clipboard option does not work 
 - Some known issues around interacting with Citrix sessions 
 
 We are working on these and will publish an update when done
