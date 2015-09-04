@@ -90,7 +90,11 @@ namespace Free_Short_Keys
 
         private ShortKey GetSelectedItem()
         {
-            return (ShortKey)gridShortKeys.SelectedRows[0].DataBoundItem;
+            if (gridShortKeys.SelectedRows.Count > 0)
+            {
+                return (ShortKey)gridShortKeys.SelectedRows[0].DataBoundItem;
+            }
+            return null;
         }
 
         private async void btnRemove_Click(object sender, EventArgs e)

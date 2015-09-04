@@ -105,50 +105,63 @@ namespace Free_Short_Keys
 
         public static async Task AddShortKey(ShortKey key)
         {
-            if (CapturedShortKeys.ContainsKey(key.Category))
+            if (key != null)
             {
-                CapturedShortKeys[key.Category].Add(key);
+                if (CapturedShortKeys.ContainsKey(key.Category))
+                {
+                    CapturedShortKeys[key.Category].Add(key);
+                }
+                else
+                {
+                    CapturedShortKeys.Add(key.Category, new List<ShortKey>() { key });
+                }
+                await Save();
             }
-            else
-            {
-                CapturedShortKeys.Add(key.Category, new List<ShortKey>() { key });
-            }
-            await Save();
         }
 
         public static async Task UpdateShortKey(ShortKey key)
         {
-            if (!CapturedShortKeys.ContainsKey(key.Category))
+            if (key != null)
             {
-                CapturedShortKeys.Add(key.Category, new List<ShortKey>());
-            }
-            var shortKey = FindShortKey(key);
-            if (shortKey != null)
-            {
-                foreach (PropertyInfo prop in typeof(ShortKey).GetProperties())
+                if (!CapturedShortKeys.ContainsKey(key.Category))
                 {
-                    if (prop.Name != "Id" && prop.Name != "Category")
+                    CapturedShortKeys.Add(key.Category, new List<ShortKey>());
+                }
+                var shortKey = FindShortKey(key);
+                if (shortKey != null)
+                {
+                    foreach (PropertyInfo prop in typeof(ShortKey).GetProperties())
                     {
-                        prop.SetValue(shortKey, prop.GetValue(key));
+                        if (prop.Name != "Id" && prop.Name != "Category")
+                        {
+                            prop.SetValue(shortKey, prop.GetValue(key));
+                        }
                     }
                 }
+                await Save();
             }
-            await Save();
         }
 
         public static async Task RemoveShortKey(ShortKey key)
         {
-            var shortKey = FindShortKey(key);
-            if (shortKey != null)
+            if (key != null)
             {
-                CapturedShortKeys[key.Category].Remove(shortKey);
-                await Save();
+                var shortKey = FindShortKey(key);
+                if (shortKey != null)
+                {
+                    CapturedShortKeys[key.Category].Remove(shortKey);
+                    await Save();
+                }
             }
         }
 
         private static ShortKey FindShortKey(ShortKey key)
         {
-            return CapturedShortKeys[key.Category].FirstOrDefault(o => o.Id == key.Id);
+            if (key != null)
+            {
+                return CapturedShortKeys[key.Category].FirstOrDefault(o => o.Id == key.Id);
+            }
+            return null;
         }
 
         public static void FlushLogs()
