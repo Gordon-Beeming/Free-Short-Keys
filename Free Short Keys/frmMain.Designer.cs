@@ -97,6 +97,7 @@
             this.txtSuffix.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSuffix.Location = new System.Drawing.Point(57, 27);
+            this.txtSuffix.MaxLength = 2;
             this.txtSuffix.Name = "txtSuffix";
             this.txtSuffix.Size = new System.Drawing.Size(96, 25);
             this.txtSuffix.TabIndex = 4;
