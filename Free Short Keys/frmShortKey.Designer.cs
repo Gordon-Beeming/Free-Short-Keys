@@ -115,6 +115,7 @@ namespace Free_Short_Keys
             this.txtNotes.Location = new System.Drawing.Point(11, 311);
             this.txtNotes.Multiline = true;
             this.txtNotes.Name = "txtNotes";
+            this.txtNotes.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtNotes.Size = new System.Drawing.Size(468, 95);
             this.txtNotes.TabIndex = 13;
             // 
@@ -222,11 +223,13 @@ namespace Free_Short_Keys
             this.txtReplacementKey.Location = new System.Drawing.Point(12, 153);
             this.txtReplacementKey.Multiline = true;
             this.txtReplacementKey.Name = "txtReplacementKey";
+            this.txtReplacementKey.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtReplacementKey.Size = new System.Drawing.Size(467, 135);
             this.txtReplacementKey.TabIndex = 11;
             // 
             // chkSaveRepalcementKeyCursorPosition
             // 
+            this.chkSaveRepalcementKeyCursorPosition.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chkSaveRepalcementKeyCursorPosition.AutoSize = true;
             this.chkSaveRepalcementKeyCursorPosition.Location = new System.Drawing.Point(12, 414);
             this.chkSaveRepalcementKeyCursorPosition.Name = "chkSaveRepalcementKeyCursorPosition";
