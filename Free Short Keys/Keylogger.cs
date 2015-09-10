@@ -472,9 +472,9 @@ namespace Free_Short_Keys
         public static string PerformNewLineFix(string shortKeyText)
         {
             string result = shortKeyText;
-            result = result.Replace("\r\n", " {ENTER}");
-            result = result.Replace("\r", " {ENTER}");
-            result = result.Replace("\n", " {ENTER}");
+            result = result.Replace("\r\n", " {ENTER}{HOME}{HOME}");
+            result = result.Replace("\r", " {ENTER}{HOME}{HOME}");
+            result = result.Replace("\n", " {ENTER}{HOME}{HOME}");
             return result;
         }
         
