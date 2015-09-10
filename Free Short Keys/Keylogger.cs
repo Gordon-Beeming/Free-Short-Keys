@@ -148,7 +148,11 @@ namespace Free_Short_Keys
                             {
                                 SendKeys.Send($"{{BACKSPACE {fullKey.Length}}}");
                             });
-                            string keys = PerformNewLineFix(shortKey.ReplacementKey);
+                            string keys = shortKey.ReplacementKey;
+                            if (!shortKey.UseClipboard)
+                            {
+                                keys = PerformNewLineFix(keys);
+                            }
                             keys = ReplaceRegexPatterns(keys);
                             if (shortKey.UseClipboard)
                             {
@@ -468,9 +472,9 @@ namespace Free_Short_Keys
         public static string PerformNewLineFix(string shortKeyText)
         {
             string result = shortKeyText;
-            result = result.Replace("\r\n", "{ENTER}");
-            result = result.Replace("\r", "{ENTER}");
-            result = result.Replace("\n", "{ENTER}");
+            result = result.Replace("\r\n", " {ENTER}");
+            result = result.Replace("\r", " {ENTER}");
+            result = result.Replace("\n", " {ENTER}");
             return result;
         }
         

@@ -133,9 +133,9 @@ namespace Free_Short_Keys
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(11, 108);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(85, 17);
+            this.label5.Size = new System.Drawing.Size(86, 17);
             this.label5.TabIndex = 6;
-            this.label5.Text = "Use Keyboard";
+            this.label5.Text = "Use Clipboard";
             // 
             // chkUseClipboard
             // 
